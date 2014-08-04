@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>net.m4dz.firefox-profile-launcher</string>
+	<key>category</key>
+	<string>Internet</string>
+	<key>connections</key>
+	<dict>
+		<key>67003765-C019-4A51-B866-3710AFC98D1F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C0EE6EE7-B433-43BA-8901-0E785980741E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>087CF94E-DAEA-40E7-8DAD-C6622B312A18</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Open FirefoxAurora with profile…</string>
+			</dict>
+		</array>
+		<key>C0EE6EE7-B433-43BA-8901-0E785980741E</key>
+		<array/>
+		<key>D67CDF01-9EC0-4A06-82A7-5043052BF789</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>18E9965C-B080-4D3B-8654-9A354036986E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>M4D'z</string>
+	<key>description</key>
+	<string>Launch Firefox/Aurora by choosing in existing profiles</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Firefox Profile Launcher</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>open -a Firefox --args -p {query}</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C0EE6EE7-B433-43BA-8901-0E785980741E</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>fox</string>
+				<key>script</key>
+				<string>import ConfigParser, os
+
+config = ConfigParser.RawConfigParser()
+config.read(os.path.expanduser('~/Library/application Support/Firefox/profiles.ini'))
+
+items = []
+
+for profile_id in config.sections():
+  if profile_id == 'General':
+    continue
+  name = config.get(profile_id, 'Name')
+  items.append('&lt;item arg="%(arg)s" uid="%(uid)s" valid="yes"&gt;&lt;title&gt;%(arg)s&lt;/title&gt;&lt;/item&gt;' % {'arg': name, 'uid': profile_id})
+
+
+print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;' % ''.join(items)
+</string>
+				<key>subtext</key>
+				<string>Open Firefox with profile…</string>
+				<key>title</key>
+				<string>Firefox Profile</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>67003765-C019-4A51-B866-3710AFC98D1F</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>open -a FirefoxAurora --args -p {query}</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>087CF94E-DAEA-40E7-8DAD-C6622B312A18</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>open -a Firefox --args -ProfileManager</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>18E9965C-B080-4D3B-8654-9A354036986E</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>foxpm</string>
+				<key>text</key>
+				<string>Firefox ProfileManager</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D67CDF01-9EC0-4A06-82A7-5043052BF789</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>087CF94E-DAEA-40E7-8DAD-C6622B312A18</key>
+		<dict>
+			<key>ypos</key>
+			<real>270</real>
+		</dict>
+		<key>18E9965C-B080-4D3B-8654-9A354036986E</key>
+		<dict>
+			<key>ypos</key>
+			<real>410</real>
+		</dict>
+		<key>67003765-C019-4A51-B866-3710AFC98D1F</key>
+		<dict>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
+		<key>C0EE6EE7-B433-43BA-8901-0E785980741E</key>
+		<dict>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
+		<key>D67CDF01-9EC0-4A06-82A7-5043052BF789</key>
+		<dict>
+			<key>ypos</key>
+			<real>410</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
