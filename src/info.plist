@@ -57,7 +57,7 @@
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>open -a Firefox --args -p {query}</string>
+				<string>open -n -a Firefox --args -p {query}</string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -116,7 +116,7 @@ print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>open -a FirefoxAurora --args -p {query}</string>
+				<string>open -n -a FirefoxAurora --args -p {query}</string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -124,23 +124,6 @@ print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>087CF94E-DAEA-40E7-8DAD-C6622B312A18</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>open -a Firefox --args -ProfileManager</string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>18E9965C-B080-4D3B-8654-9A354036986E</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -160,6 +143,23 @@ print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>D67CDF01-9EC0-4A06-82A7-5043052BF789</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>open -n -a Firefox --args -ProfileManager</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>18E9965C-B080-4D3B-8654-9A354036986E</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
