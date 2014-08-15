@@ -29,17 +29,6 @@
 		</array>
 		<key>C0EE6EE7-B433-43BA-8901-0E785980741E</key>
 		<array/>
-		<key>D67CDF01-9EC0-4A06-82A7-5043052BF789</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>18E9965C-B080-4D3B-8654-9A354036986E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>M4D'z</string>
@@ -55,9 +44,9 @@
 			<key>config</key>
 			<dict>
 				<key>escaping</key>
-				<integer>127</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>open -n -a Firefox --args -p {query}</string>
+				<string>open -n -a Firefox --args {query} &amp;</string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -72,26 +61,36 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>keyword</key>
 				<string>fox</string>
+				<key>runningsubtext</key>
+				<string>Load Firefox existing profiles…</string>
 				<key>script</key>
 				<string>import ConfigParser, os
+from string import Template
 
 config = ConfigParser.RawConfigParser()
 config.read(os.path.expanduser('~/Library/application Support/Firefox/profiles.ini'))
 
+itemTpl = Template('&lt;item arg="$arg" uid="$uid" valid="yes"&gt;&lt;title&gt;$name&lt;/title&gt;&lt;/item&gt;')
+
 items = []
 
 for profile_id in config.sections():
-  if profile_id == 'General':
-    continue
-  name = config.get(profile_id, 'Name')
-  items.append('&lt;item arg="%(arg)s" uid="%(uid)s" valid="yes"&gt;&lt;title&gt;%(arg)s&lt;/title&gt;&lt;/item&gt;' % {'arg': name, 'uid': profile_id})
+	if profile_id == 'General':
+		continue
+   
+	name = config.get(profile_id, 'Name')
+	if name.lower().find('{query}'.lower()) == -1:
+		continue
+
+	items.append( itemTpl.substitute({'arg': '-p ' + name, 'name': name, 'uid': profile_id}) )
 
 
+items.append( itemTpl.substitute({'arg': '-ProfileManager', 'name': 'ProfileManager', 'uid': 'profilemanager'}) )
 print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;' % ''.join(items)
 </string>
 				<key>subtext</key>
@@ -101,7 +100,7 @@ print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;
 				<key>type</key>
 				<integer>3</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -114,9 +113,9 @@ print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;
 			<key>config</key>
 			<dict>
 				<key>escaping</key>
-				<integer>127</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>open -n -a FirefoxAurora --args -p {query}</string>
+				<string>open -n -a FirefoxAurora --args {query} &amp;</string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -124,42 +123,6 @@ print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>087CF94E-DAEA-40E7-8DAD-C6622B312A18</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>foxpm</string>
-				<key>text</key>
-				<string>Firefox ProfileManager</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>D67CDF01-9EC0-4A06-82A7-5043052BF789</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>open -n -a Firefox --args -ProfileManager</string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>18E9965C-B080-4D3B-8654-9A354036986E</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -173,11 +136,6 @@ print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
-		<key>18E9965C-B080-4D3B-8654-9A354036986E</key>
-		<dict>
-			<key>ypos</key>
-			<real>410</real>
-		</dict>
 		<key>67003765-C019-4A51-B866-3710AFC98D1F</key>
 		<dict>
 			<key>ypos</key>
@@ -187,11 +145,6 @@ print '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;%s&lt;/items&gt;
 		<dict>
 			<key>ypos</key>
 			<real>150</real>
-		</dict>
-		<key>D67CDF01-9EC0-4A06-82A7-5043052BF789</key>
-		<dict>
-			<key>ypos</key>
-			<real>410</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>

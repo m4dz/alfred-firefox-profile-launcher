@@ -9,7 +9,7 @@ Setup
 -----
 
 You can use multiple profiles in Firefox to sandbow your users or isolate your workflows.
-To create a (or many) new profile(s), you must launch the Firefox ProfileManager. This workflow embed a shortcut to launch it : simply use the `foxpm` keyword. Be careful that you should not run any previous instance of Firefox when calling the ProfileManager.
+To create a (or many) new profile(s), you must launch the Firefox ProfileManager. This workflow embed a shortcut to launch it : simply use the `fox` keyword and select `ProfileManager`into the list.
 
 ![screenshot-profilemanager](./screenshot-profilemanager.png)
 
@@ -18,7 +18,7 @@ Use it to create/duplicate your profiles. They now become available in Firefox a
 Call
 ----
 
-To call the workflow, use the `fox` keyword. It will show you all available profiles. Simply select the one that you want and it will launch Firefox with this profile selected.
+To call the workflow, use the `fox` keyword. It will show you all available profiles. Simply select the one that you want and it will launch Firefox with this profile selected. The keyword trigger accept filtering, so you can continue to type a partial for your desired profile name to refine the choices.
 
 You can run as many instance as you want of Firefox, as long as each one use a separate profile.
 
